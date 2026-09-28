@@ -1,1 +1,41 @@
-test1
+trigger: none
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      endpoint: yellesh12
+      name: yellesh12/customerexamplerepo
+      ref: refs/heads/main
+
+    - repository: templates
+      type: github
+      endpoint: yellesh12
+      name: yellesh12/customerexamplerepo
+      ref: refs/heads/v1
+
+   - repository: templates
+      type: github
+      endpoint: yellesh12
+      name: yellesh12/customerexamplerepo
+      ref: refs/heads/v2
+
+  - repository: templates
+      type: github
+      endpoint: yellesh12
+      name: yellesh12/customerexamplerepo
+      ref: refs/heads/v3
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+
+- checkout: templates
+
+- script: |
+    echo "Branch = $(Build.SourceBranch)"
+    echo "Repository downloaded successfully"
+    ls -R $(Build.SourcesDirectory)
+  displayName: 'Test GitHub Repository Checkout'
